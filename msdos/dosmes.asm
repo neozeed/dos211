@@ -50,25 +50,25 @@ Current_Country DW      OFFSET DOSGROUP:USTABLE
 ;
 ;               BYTE  Size of this table excluding this byte and the next
 ;               BYTE  Country code represented by this table
-;                       A sequence of n bytes, where n is the number specified
+;	                A sequence of n bytes, where n is the number specified
 ;                       by the first byte above and is not > internat_block_max,
 ;                       in the correct order for being returned by the
 ;                       INTERNATIONAL call as follows:
-;               WORD    Date format 0=mdy, 1=dmy, 2=ymd
-;               5 BYTE  Currency symbol null terminated
-;               2 BYTE  thousands separator null terminated
-;               2 BYTE  Decimal point null terminated
-;               2 BYTE  Date separator null terminated
-;               2 BYTE  Time separator null terminated
-;               1 BYTE  Bit field.  Currency format.
-;                       Bit 0.  =0 $ before #  =1 $ after #
-;                       Bit 1.  no. of spaces between # and $ (0 or 1)
-;               1 BYTE  No. of significant decimal digits in currency
-;               1 BYTE  Bit field.  Time format.
-;                       Bit 0.  =0 12 hour clock  =1 24 hour
-;               WORD    Segment offset for address of case conversion routine
-;               WORD    RESERVED.  Filled in by DOS.  Segment value for above routine
-;               2 BYTE  Data list separator null terminated.
+;		WORD	Date format 0=mdy, 1=dmy, 2=ymd
+;		5 BYTE	Currency symbol null terminated
+;		2 BYTE	thousands separator null terminated
+;		2 BYTE	Decimal point null terminated
+;		2 BYTE	Date separator null terminated
+;		2 BYTE	Time separator null terminated
+;		1 BYTE	Bit field.  Currency format.
+;			Bit 0.  =0 $ before #  =1 $ after #
+;			Bit 1.	no. of spaces between # and $ (0 or 1)
+;		1 BYTE	No. of significant decimal digits in currency
+;		1 BYTE	Bit field.  Time format.
+;			Bit 0.  =0 12 hour clock  =1 24 hour
+;		WORD	Segment offset for address of case conversion routine
+;		WORD	RESERVED.  Filled in by DOS.  Segment value for above routine
+;		2 BYTE	Data list separator null terminated.
 ;                  NOTE: The segment part of the DWORD Map_call is set
 ;                       by the INTERNATIONAL call. Do not try to initialize
 ;                       it to anything meaningful.
@@ -89,15 +89,15 @@ JAPTABLE internat_block <2,'\',0,0,0,0,',',0,'.',0,'-',0,':',0,0,0,1,OFFSET DOSG
                     DB  SIZE internat_block   ; Size in bytes of this table
                     DB  1               ; Country code
 USTABLE internat_block <0,'$',0,0,0,0,',',0,'.',0,'-',0,':',0,0,2,0,OFFSET DOSGROUP:MAP_DCASE,0,',',0>
-;       Tables for the IBM PC character set follow.  The values
-;       associated with some of the currency symbols may change with
-;       other character sets.  You may wish to add or delete country
-;       entries.  NOTE: It is not a mistake that the JAPANESE entry
-;       has different currency symbols for the KANJI and
-;       non-KANJI versions.
+;	Tables for the IBM PC character set follow.  The values
+;	associated with some of the currency symbols may change with
+;	other character sets.  You may wish to add or delete country
+;	entries.  NOTE: It is not a mistake that the JAPANESE entry
+;	has different currency symbols for the KANJI and
+;	non-KANJI versions.
 
-IF      NOT     KANJI
-IF      IBM
+IF	NOT	KANJI
+IF	IBM
                     DB  SIZE internat_block   ; Size in bytes of this table
                     DB  44              ; Country code
 UKTABLE internat_block <1,9Ch,0,0,0,0,',',0,'.',0,'-',0,':',0,0,2,0,OFFSET DOSGROUP:MAP_DCASE,0,',',0>
@@ -110,6 +110,7 @@ FRNTABLE internat_block <1,'F',0,0,0,0,' ',0,',',0,'/',0,':',0,3,2,1,OFFSET DOSG
                     DB  SIZE internat_block   ; Size in bytes of this table
                     DB  81              ; Country code
 JAPTABLE internat_block <2,9DH,0,0,0,0,',',0,'.',0,'-',0,':',0,0,0,1,OFFSET DOSGROUP:MAP_DCASE , 0,',',0>
+ENDIF
 ENDIF
                     DB  -1              ; End of tables
 
@@ -127,32 +128,32 @@ ASSUME  CS:DOSGROUP,DS:NOTHING,ES:NOTHING,SS:NOTHING
 ;
 ; Example:
        MAP_DCASE       PROC FAR
-IF      NOT     KANJI
-IF      IBM
+IF	NOT	KANJI
+IF	IBM
                CMP     AL,80H
                JB      L_RET           ;Map no chars below 80H ever
                CMP     AL,0A7H
                JA     L_RET             ;This routine maps chars between 80H and A7H
-                SUB     AL,80H          ;Turn into index value
-                PUSH    DS
-                PUSH    BX
-                PUSH    CS              ;Move to DS
-                POP     DS
-                MOV     BX,OFFSET DOSGROUP:TABLE
-                XLAT                    ;Get upper case character
-                POP     BX
-                POP     DS
+		SUB	AL,80H		;Turn into index value
+		PUSH	DS
+		PUSH	BX
+		PUSH	CS		;Move to DS
+		POP	DS
+		MOV	BX,OFFSET DOSGROUP:TABLE
+		XLAT			;Get upper case character
+		POP	BX
+		POP	DS
 ENDIF
 ENDIF
        L_RET:  RET
        MAP_DCASE ENDP
-IF      NOT KANJI
-IF      IBM
-TABLE:  DB      80H,9AH,"E","A",8EH,"A",8FH,80H
-        DB      "E","E","E","I","I","I",8EH,8FH
-        DB      90H,92H,92H,"O",99H,"O","U","U"
-        DB      "Y",99H,9AH,9BH,9CH,9DH,9EH,9FH
-        DB      "A","I","O","U",0A5H,0A5H,0A6H,0A7H
+IF	NOT KANJI
+IF	IBM
+TABLE:	DB	80H,9AH,"E","A",8EH,"A",8FH,80H
+	DB	"E","E","E","I","I","I",8EH,8FH
+	DB	90H,92H,92H,"O",99H,"O","U","U"
+	DB	"Y",99H,9AH,9BH,9CH,9DH,9EH,9FH
+	DB	"A","I","O","U",0A5H,0A5H,0A6H,0A7H
 ENDIF
 ENDIF
 

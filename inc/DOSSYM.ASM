@@ -914,7 +914,8 @@ Setblock                        EQU 74  ; 74     4A
 ;    Process Group
 Exec                            EQU 75  ; 75     4B
 Exit                            EQU 76  ; 76     4C
-Wait                            EQU 77  ; 77     4D
+DWait                            EQU 77  ; 77     4D
+					; WAIT is now a reserved word
 Find_First                      EQU 78  ; 78     4E
 ;   Special Group
 Find_Next                       EQU 79  ; 79     4F

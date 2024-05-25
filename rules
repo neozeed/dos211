@@ -42,7 +42,8 @@ menubld =$(emu) $(DOS2ROOT)\tools\menubld
 oldasm  =$(emu) $(DOS2ROOT)\tools\masm
 asm     =$(DOS2ROOT)\binnt\masm386
 aflags  =-Mx -t $(extasw)
-ainc    =-I. -I$(inc) -I$(dos)
+#ainc    =-I. -I$(inc) -I$(dos)
+ainc    =-I.
 
 ########## Definitions for C compiler ##########
 

@@ -483,7 +483,7 @@ SNULDEV ENDP
 INULDEV ENDP
 
 
-BREAK <AbsDRD, AbsDWRT -- INT int_disk_read, int_disk_write handlers>>
+BREAK <AbsDRD, AbsDWRT -- INT int_disk_read, int_disk_write handlers>
 
 
         IF      IBM

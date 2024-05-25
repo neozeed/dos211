@@ -20,9 +20,5 @@ IBMDOS.COM: $(OBJS)
 %.obj: %.asm
 	$(MASM) $*.asm $*.obj NUL NUL
 
-mscode.obj:
-	$(MASM) $*.asm $*.obj NUL NUL
-
-
 clean:
 	del -f $(OBJS) *.crf *.lst MSDOS.EXE IBMDOS.COM

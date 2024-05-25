@@ -20,11 +20,5 @@ MSDOS.SYS: $(OBJS)
 %.obj: %.asm
 	$(MASM) $*.asm $*.obj NUL NUL
 
-mscode.obj:
-	$(MASM) $*.asm $*.obj NUL NUL
-
-dosmes.obj:
-	$(MASM) $*.asm $*.obj NUL NUL
-
 clean:
 	del -f $(OBJS) *.crf *.lst MSDOS.EXE MSDOS.SYS

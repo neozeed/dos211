@@ -585,7 +585,7 @@ GETDIG:
         MOV     DL,AH                   ; And include new digit
         LOOP    GETDIG                  ; At most 2 digits
 ; We have two digits, so all we will accept now is a command.
-DWAIT:
+DDWAIT:
         CALL    IN                      ; Get command character
 NOHEX:
         CMP     AL,8                    ; Backspace
@@ -601,7 +601,7 @@ NOHEX:
         MOV     AL,8
         CALL    OUT                     ; Back   CLDover illegal character
         CALL    BACKUP
-        JCXZ    DWAIT
+        JCXZ    DDWAIT
         JMP     SHORT GETDIG
 
 RUB:

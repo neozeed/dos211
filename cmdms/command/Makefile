@@ -20,8 +20,5 @@ COMMAND.COM: $(OBJS)
 %.obj: %.asm
 	$(MASM) $*.asm $*.obj NUL NUL
 
-command.obj:
-	$(MASM) $*.asm $*.obj NUL NUL
-
 clean:
 	del -f $(OBJS) *.crf *.lst COMMAND.COM
