@@ -1,3 +1,9 @@
+#
+####################### dependencies begin here. #########################
+#
+include ..\..\rules
+
+
 OBJS = sys.obj sysmes.obj
 
 MASM = msdos ..\..\tools\masm
@@ -14,4 +20,4 @@ SYS.COM: $(OBJS)
 	$(MASM) $*.asm $*.obj NUL NUL
 
 clean:
-	del -f $(OBJS) *.crf *.lst sys.EXE
+	del -f $(OBJS) *.crf *.lst sys.EXE sys.com

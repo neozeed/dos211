@@ -1,0 +1,78 @@
+#############################################################################
+#                                                                           #
+# These are the built in rules and path definitions used by the new MS Make #
+# Utility (NMAKE). The following variables are set externaly (ie set in the #
+# individual makefiles.                                                     #
+#                                                                           #
+# extasw = The 'extra assembly switch' variable is optionaly used in the    #
+#          makefile to specify special MASM command line switches.          #
+#                                                                           #
+# extcsw = The 'extra C switch' variable is optionaly used in the makefile  #
+#          to specify special C compiler command line switches.             #
+#                                                                           #
+# inc    = The include file search path from the utility being built to the #
+#          INC directory. Used if needed.                                   #
+#                                                                           #
+# dos    = The include file search path from the utility being built to the #
+#          DOS directory. Used if needed.                                   #
+#                                                                           #
+# hinc   = The include file search path from the utility being built to the #
+#          H directory. Used if needed for C source compilation.            #
+#                                                                           #
+#############################################################################
+
+# DOS2ROOT is set in env.cmd
+
+COUNTRY = usa-ms
+########## Definitionms for the Assembler ##########
+emu     =msdos486
+oldlib  =$(emu) $(DOS2ROOT)\tools\lib
+libr    =$(DOS2ROOT)\vc152\lib
+exe2bin =$(emu) $(DOS2ROOT)\tools\exe2bin
+dbof    =$(emu) $(DOS2ROOT)\tools\dbof
+compress =$(emu) $(DOS2ROOT)\tools\compress
+asc2hlp =$(emu) $(DOS2ROOT)\tools\asc2hlp
+buildidx =$(emu) $(DOS2ROOT)\tools\buildidx
+convert =$(emu) $(DOS2ROOT)\tools\convert
+exefix  =$(emu) $(DOS2ROOT)\tools\exefix
+nosrvbld =$(emu) $(DOS2ROOT)\tools\nosrvbld
+buildmsg =$(emu) $(DOS2ROOT)\tools\buildmsg
+menubld =$(emu) $(DOS2ROOT)\tools\menubld
+
+oldasm  =$(emu) $(DOS2ROOT)\tools\masm
+asm     =$(DOS2ROOT)\binnt\masm386
+aflags  =-Mx -t $(extasw)
+ainc    =-I. -I$(inc) -I$(dos)
+
+########## Definitions for C compiler ##########
+
+occ     =$(emu) $(DOS2ROOT)\tools\cl
+ocflags =-AS -Os -Zp $(extcsw)
+cc      =$(emu) $(DOS2ROOT)\tools\cl
+cflags  =-AS -Os -Zp $(extcsw)
+
+cinc    =-I. -I$(hinc)
+
+########## Definitions for linker ##########
+
+link    =$(emu) $(DOS2ROOT)\tools\link
+
+########## Built-in rules ##########
+
+.SUFFIXES:
+.SUFFIXES: .c .obj .lst .exe .com .cod .inc .skl .cl1 .ctl .asm .idx .msg
+
+.asm.obj:
+        $(asm) $(aflags) $(ainc) $*.asm,$*.obj;
+
+.asm.lst:
+        $(asm) -l $(aflags) $(ainc) $*.asm;
+
+.c.obj:
+        $(cc) -c $(cflags) $(cinc) -Fo$*.obj $*.c
+
+.c.lst:
+        $(cc) -c $(cflags) $(cinc) -fc$*.cod -fo$*.obj $*.c
+
+.exe.com:
+        $(emu) $(DOS2ROOT)\tools\reloc $*.exe $*.com

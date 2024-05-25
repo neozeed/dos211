@@ -1,3 +1,9 @@
+#
+####################### dependencies begin here. #########################
+#
+include ..\..\rules
+
+
 OBJS = edlin.obj     edlmes.obj    edlproc.obj
 
 MASM = msdos ..\..\tools\masm

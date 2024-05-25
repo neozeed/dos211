@@ -1,3 +1,9 @@
+#
+####################### dependencies begin here. #########################
+#
+include ..\..\rules
+
+
 OBJS = sort.obj sortmes.obj
 
 MASM = msdos ..\..\tools\masm

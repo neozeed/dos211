@@ -1,3 +1,9 @@
+#
+####################### dependencies begin here. #########################
+#
+include ..\..\rules
+
+
 OBJS = command.obj    copy.obj       copyproc.obj   cparse.obj       init.obj       rdata.obj      \
 	rucode.obj     tcode.obj      tcode2.obj     tcode3.obj     tcode4.obj     tcode5.obj       \
 	tdata.obj      tspc.obj       tucode.obj     uinit.obj
@@ -12,6 +18,9 @@ COMMAND.COM: $(OBJS)
 	del -f $(OBJS) COMMAND.EXE
 
 %.obj: %.asm
+	$(MASM) $*.asm $*.obj NUL NUL
+
+command.obj:
 	$(MASM) $*.asm $*.obj NUL NUL
 
 clean:

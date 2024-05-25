@@ -1,3 +1,8 @@
+#
+####################### dependencies begin here. #########################
+#
+include ..\rules
+
 
 OBJ = ibmbio.obj    sysimes.obj   sysinit.obj
 

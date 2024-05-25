@@ -1,3 +1,9 @@
+#
+####################### dependencies begin here. #########################
+#
+include ..\..\rules
+
+
 OBJS = find.obj   findmes.obj
 
 MASM = msdos ..\..\tools\masm

@@ -1,3 +1,9 @@
+#
+####################### dependencies begin here. #########################
+#
+include ..\..\rules
+
+
 OBJS = debasm.obj     debcom1.obj    debcom2.obj    debconst.obj   debdata.obj    debmes.obj     \
 	debuasm.obj debug.obj
 

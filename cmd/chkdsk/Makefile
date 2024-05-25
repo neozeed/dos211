@@ -1,3 +1,9 @@
+#
+####################### dependencies begin here. #########################
+#
+include ..\..\rules
+
+
 OBJS = chkdsk.obj    chkmes.obj    chkproc.obj
 
 MASM = msdos ..\..\tools\masm

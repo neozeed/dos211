@@ -1,3 +1,9 @@
+#
+####################### dependencies begin here. #########################
+#
+include ..\..\rules
+
+
 OBJS = print.obj
 
 MASM = msdos ..\..\tools\masm

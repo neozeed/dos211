@@ -1,3 +1,9 @@
+#
+####################### dependencies begin here. #########################
+#
+include ..\..\rules
+
+
 OBJS = recover.obj recmes.obj
 
 MASM = msdos ..\..\tools\masm

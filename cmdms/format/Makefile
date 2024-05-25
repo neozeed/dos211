@@ -1,3 +1,9 @@
+#
+####################### dependencies begin here. #########################
+#
+include ..\..\rules
+
+
 OBJS = format.obj   formes.obj   genfor.obj
 
 MASM = msdos ..\..\tools\masm

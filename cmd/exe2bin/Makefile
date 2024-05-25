@@ -1,3 +1,9 @@
+#
+####################### dependencies begin here. #########################
+#
+include ..\..\rules
+
+
 OBJS = exe2bin.obj   exemes.obj
 
 MASM = msdos ..\..\tools\masm
@@ -12,4 +18,4 @@ EXE2BIN.COM: $(OBJS)
 	$(MASM) $*.asm $*.obj NUL NUL
 
 clean:
-	del -f $(OBJS) *.crf *.lst EXE2BIN.COM
+	del -f $(OBJS) *.crf *.lst EXE2BIN.COM EXE2BIN.EXE

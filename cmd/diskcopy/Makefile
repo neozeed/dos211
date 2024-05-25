@@ -1,3 +1,9 @@
+#
+####################### dependencies begin here. #########################
+#
+include ..\..\rules
+
+
 OBJS = diskcopy.obj   diskmes.obj
 
 MASM = msdos ..\..\tools\masm

@@ -1,3 +1,9 @@
+#
+####################### dependencies begin here. #########################
+#
+include ..\..\rules
+
+
 OBJS = fc.obj   fcmes.obj
 
 MASM = msdos ..\..\tools\masm
